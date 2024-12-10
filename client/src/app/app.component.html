@@ -1,0 +1,17 @@
+<div class="app-layout content" [ngClass]="{'mobile-view': isMobileView}">
+    <div class="app-body">
+        <sidebar [categories]="categories" (categorySelected)="onCategorySelected($event)" [collapsed]="isSidebarCollapsed" (toggle)="onSidebarToggle($event)" [isMobile]="isMobileView" aria-label="Sidebar Menu">
+        </sidebar>
+
+        <div class="content" [ngClass]="{
+                'content-expanded': !isSidebarCollapsed, 
+                'content-collapsed': isSidebarCollapsed
+            }">
+            <!-- Toggle between List and Details on mobile -->
+            <app-list *ngIf="!isMobileView || showListView" [categorySelected]="categorySelected" [items]="selectedCategoryItems" (itemSelected)="onItemSelected($event)">
+            </app-list>
+            <app-details *ngIf="!isMobileView || !showListView" [item]="selectedItem" [isMobile]="isMobileView" (back)="onBackToList()" aria-live="polite">
+            </app-details>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div *ngIf="item" class="details">
+    <div class="details-header">
+        <button *ngIf="isMobile" class="back-button" (click)="back.emit()" aria-label="Back to previous page">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+        </button>
+        <h3>{{ item.name || "Details" }}</h3>
+        <div class="header-actions">
+            <app-button icon="fa fa-edit" label="Edit" variant="primary" aria-label="Edit item details"></app-button>
+            <app-button icon="fa fa-trash" label="Delete" variant="danger" aria-label="Delete item"></app-button>
+        </div>
+    </div>
+    <form>
+        <!-- Fields go here -->
+        <div class="actions">
+            <app-button icon="fa fa-save" label="Save" [disabled]="!isEditing" variant="primary" aria-label="Save changes" [attr.aria-disabled]="!isEditing ? 'true' : null"></app-button>
+        </div>
+    </form>
+</div>

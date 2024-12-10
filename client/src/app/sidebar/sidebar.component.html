@@ -1,0 +1,73 @@
+<div class="sidebar" [ngClass]="{'collapsed': collapsed}" role="navigation" aria-label="Main Navigation">
+    <button class="sidebar-toggle" (click)="toggleSidebar()" aria-label="Toggle Sidebar">
+        <i [class]="collapsed ? 'fas fa-bars' : 'fas fa-times'" aria-hidden="true"></i>
+    </button>
+
+    <ul class="list" role="menu">
+        <!-- Create New Menu Item -->
+        <li (click)="selectMenuItem('createNew')" [class.selected]="selectedMenuItem === 'createNew'" role="menuitem" aria-label="Create New" [attr.title]="collapsed ? 'Create New' : null">
+            <div class="item">
+                <span class="category-icon">
+                    <i class="fas fa-plus" aria-hidden="true"></i>
+                </span>
+                <span class="category-text" *ngIf="!collapsed">Create New</span>
+            </div>
+        </li>
+
+        <!-- Settings Menu Item -->
+        <li (click)="selectMenuItem('settings')" [class.selected]="selectedMenuItem === 'settings'" role="menuitem" aria-label="Settings" [attr.title]="collapsed ? 'Settings' : null">
+            <div class="item">
+                <span class="category-icon">
+                    <i class="fas fa-cogs" aria-hidden="true"></i>
+                </span>
+                <span class="category-text" *ngIf="!collapsed">Settings</span>
+            </div>
+        </li>
+
+        <!-- Profile Menu Item -->
+        <li (click)="selectMenuItem('profile')" [class.selected]="selectedMenuItem === 'profile'" role="menuitem" aria-label="Profile" [attr.title]="collapsed ? 'Profile' : null">
+            <div class="item">
+                <span class="category-icon">
+                    <i class="fas fa-user" aria-hidden="true"></i>
+                </span>
+                <span class="category-text" *ngIf="!collapsed">Profile</span>
+            </div>
+        </li>
+
+        <!-- Vault Menu Item (toggles the vault list) -->
+        <li (click)="toggleVault()" [class.selected]="isVaultSelected" role="menuitem" aria-label="Vault" [attr.title]="collapsed ? 'Vault' : null" [attr.aria-expanded]="!isVaultCollapsed">
+            <div class="item">
+                <span class="category-icon">
+                    <i class="fas fa-lock" aria-hidden="true"></i>
+                </span>
+                <span class="category-text" *ngIf="!collapsed">Vault</span>
+                <i [class]="isVaultCollapsed ? 'fas fa-chevron-down' : 'fas fa-chevron-up'" aria-hidden="true"></i>
+            </div>
+        </li>
+
+        <!-- Vault Categories (only visible when Vault is expanded) -->
+        <div *ngIf="!isVaultCollapsed && !isMobile" class="vault-list" role="menu">
+            <li *ngFor="let category of categories" (click)="selectCategory(category)" [class.selected]="selectedCategory === category" role="menuitem" [attr.title]="collapsed ? category.name : null" [attr.aria-label]="category.name">
+                <div class="item">
+                    <span class="category-icon">
+                        <i [class]="category.icon" aria-hidden="true"></i>
+                    </span>
+                    <span class="category-text" *ngIf="!collapsed">{{ category.name }}</span>
+                </div>
+            </li>
+        </div>
+    </ul>
+
+    <ul class="list" *ngIf="isMobile" role="menu">
+        <div *ngIf="!isVaultCollapsed" class="vault-list" role="menu">
+            <li *ngFor="let category of categories" (click)="selectCategory(category)" [class.selected]="selectedCategory === category" role="menuitem" [attr.title]="collapsed ? category.name : null" [attr.aria-label]="category.name">
+                <div class="item">
+                    <span class="category-icon">
+                        <i [class]="category.icon" aria-hidden="true"></i>
+                    </span>
+                    <span class="category-text" *ngIf="!collapsed">{{ category.name }}</span>
+                </div>
+            </li>
+        </div>
+    </ul>
+</div>

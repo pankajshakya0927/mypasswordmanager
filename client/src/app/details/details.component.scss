@@ -1,0 +1,167 @@
+/* Details Component Styles */
+
+/* Main Details Container */
+.details {
+  padding: 20px;
+  /* Padding around the details container */
+  flex-grow: 1;
+  /* Takes up remaining space in the flex container */
+  font-family: 'Arial', sans-serif;
+  /* Font for the details */
+  display: flex;
+  /* Flexbox layout for the details */
+  flex-direction: column;
+  /* Stack the child elements vertically */
+}
+
+/* Details Header */
+.details-header {
+  display: flex;
+  /* Flexbox layout for the header */
+  flex-direction: column;
+  /* Stack header sections vertically */
+  gap: 16px;
+  /* Adds space between sections in the header */
+  margin-bottom: 16px;
+  /* Margin at the bottom of the header */
+}
+
+/* Back and Name Section */
+.details-header .back-and-name {
+  display: flex;
+  /* Flexbox layout for the back button and name */
+  justify-content: space-between;
+  /* Distribute space between items */
+  align-items: center;
+  /* Vertically align items */
+}
+
+/* Back Button */
+.back-button {
+  display: flex;
+  /* Flexbox layout for the back button */
+  align-items: center;
+  /* Vertically align back button content */
+  gap: 8px;
+  /* Space between the icon and text */
+  cursor: pointer;
+  /* Pointer cursor for interactive elements */
+  color: #1890ff;
+  /* Default color for the back button */
+  font-size: 16px;
+  /* Font size for the back button */
+  font-weight: bold;
+  /* Make the text bold */
+  text-decoration: none;
+  /* Remove underline */
+}
+
+.back-button:hover {
+  color: #00509E;
+  /* Darker color on hover */
+}
+
+/* Name Section */
+.details-header h3 {
+  margin: 0;
+  /* Remove default margin */
+  font-size: 22px;
+  /* Font size for the name */
+  color: #333;
+  /* Dark grey color */
+  font-weight: bold;
+  /* Make the name text bold */
+  flex-grow: 1;
+  /* Make the name take up the remaining space */
+}
+
+/* Action Buttons Section */
+.header-actions {
+  display: flex;
+  /* Flexbox layout for the action buttons */
+  justify-content: flex-end;
+  /* Align action buttons to the right */
+  gap: 10px;
+  /* Space between action buttons */
+}
+
+/* Detail Items */
+.detail-item {
+  margin-bottom: 20px;
+  /* Bottom margin for spacing between detail items */
+}
+
+/* Label for Detail Items */
+.detail-item label {
+  font-weight: bold;
+  /* Make labels bold */
+  color: #333;
+  /* Dark grey color for labels */
+  display: block;
+  /* Make label a block element */
+  margin-bottom: 8px;
+  /* Space between label and input */
+}
+
+/* Field Container for Inputs */
+.field-container {
+  display: flex;
+  /* Flexbox layout for field and input */
+  align-items: center;
+  /* Vertically align the field and input */
+  gap: 10px;
+  /* Space between the field label and input */
+}
+
+/* Input Fields */
+.field-container input {
+  flex-grow: 1;
+  /* Input takes up remaining space */
+  padding: 10px;
+  /* Padding inside the input */
+  border: 1px solid #ddd;
+  /* Light grey border */
+  border-radius: 6px;
+  /* Rounded corners */
+  font-size: 16px;
+  /* Font size for the input */
+}
+
+/* Action Buttons for Details */
+.actions {
+  display: flex;
+  /* Flexbox layout for action buttons */
+  justify-content: flex-end;
+  /* Align action buttons to the right */
+  gap: 10px;
+  /* Space between action buttons */
+}
+
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+  /* Adjust the details layout for smaller screens */
+
+  .details {
+    margin-top: 20px;
+    /* Add margin to the top for mobile */
+    width: 100%;
+    /* Take full width on mobile */
+  }
+
+  .details-header {
+    gap: 12px;
+    /* Adjust spacing for smaller screens */
+  }
+
+  .details-header .back-and-name {
+    flex-direction: column;
+    /* Stack back button and name vertically */
+    align-items: flex-start;
+    /* Align items to the start */
+  }
+
+  .details-header h3 {
+    font-size: 20px;
+    /* Adjust font size for header on mobile */
+  }
+}

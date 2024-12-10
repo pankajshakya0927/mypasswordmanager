@@ -1,0 +1,168 @@
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #003366, #00509E);
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transition: width 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* Sidebar in collapsed state */
+.sidebar.collapsed {
+  width: 60px;
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle i {
+  font-size: 25px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect on toggle button */
+.sidebar-toggle:hover i {
+  color: #ffc107;
+  transform: scale(1.1);
+}
+
+/* Vault List - Flex layout for items in Vault */
+.vault-list {
+  display: flex;
+  flex-direction: column;
+  /* Arrange items vertically in the vault list */
+}
+
+/* Category List */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  /* Enable vertical scrolling when expanded */
+}
+
+/* List item styling */
+.list li {
+  padding: 10px 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Item container - Flexbox for alignment */
+.item {
+  display: flex;
+  align-items: baseline;
+  /* Align icon and text */
+  cursor: pointer;
+  gap: 15px;
+  /* Space between icon and text */
+}
+
+/* Adjust item gap when sidebar is collapsed */
+.sidebar.collapsed .item {
+  gap: 0;
+}
+
+/* Category Icon */
+.category-icon {
+  font-size: 20px;
+}
+
+/* Category Text */
+.category-text {
+  font-size: 14px;
+}
+
+/* Hover effect for list items */
+.list li:hover {
+  background-color: #1a75cf;
+}
+
+/* Selected category styling */
+.list li.selected {
+  background-color: #ffc107;
+  color: #003366;
+  font-weight: bold;
+}
+
+/* Adjust icon size in collapsed sidebar */
+.sidebar.collapsed .category-icon {
+  font-size: 25px;
+}
+
+/* Mobile View Sidebar */
+@media (max-width: 768px) {
+
+  /* Sidebar in mobile view */
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .sidebar.collapsed {
+    width: 100%;
+    /* Full width in collapsed state */
+  }
+
+  /* List layout for collapsed sidebar */
+  .list {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal layout for collapsed sidebar */
+    white-space: nowrap;
+    /* Prevent wrapping of items */
+  }
+
+  /* Vault list on mobile - Horizontal layout */
+  .vault-list {
+    background: linear-gradient(180deg, #004080, #0066cc);
+    /* Lighter blue shade */
+    display: flex;
+    flex-direction: row;
+    /* Arrange vault items horizontally */
+  }
+
+  /* Adjust item layout on mobile */
+  .item {
+    align-items: center;
+    /* Center align icons and text */
+    gap: 0;
+    /* Remove gap in collapsed state */
+  }
+
+  /* Adjust text size for mobile */
+  .category-text {
+    font-size: 12px;
+    /* Smaller text size for mobile */
+  }
+
+  /* Keep icons small in collapsed mode */
+  .category-icon {
+    font-size: 20px;
+  }
+
+  /* Expanded sidebar - Vertical layout for icons and text */
+  .sidebar:not(.collapsed) .item {
+    flex-direction: column;
+    /* Stack icon and text vertically */
+  }
+
+  .sidebar:not(.collapsed) .category-text {
+    display: block;
+    /* Show text when sidebar is expanded */
+  }
+}

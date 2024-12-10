@@ -1,0 +1,61 @@
+/* Reset default styles across all elements */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remove default list styling */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default link styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove default form input styles */
+input,
+textarea,
+button {
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Reset table border spacing */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Ensure consistent font style */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.5;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* Ensure images scale correctly */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure buttons look like buttons (for any native button styling) */
+button {
+  cursor: pointer;
+}
+
+/* Ensure forms look clean */
+input, select, textarea, button {
+  font-family: inherit;
+  font-size: inherit;
+}
