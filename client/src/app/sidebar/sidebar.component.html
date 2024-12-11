@@ -14,6 +14,24 @@
             </div>
         </li>
 
+        <!-- Dropdown for Create New -->
+        <div *ngIf="selectedMenuItem === 'createNew'" class="create-new-dropdown" [ngClass]="{'show': isCreateNewDropdownVisible}">
+            <ul>
+                <li (click)="selectCreateOption('category')" role="menuitem" aria-label="Category">
+                    <span class="dropdown-icon">
+                        <i class="fas fa-list" aria-hidden="true"></i> <!-- Category Icon -->
+                    </span>
+                    <span>Create Category</span>
+                </li>
+                <li (click)="selectCreateOption('record')" role="menuitem" aria-label="Record">
+                    <span class="dropdown-icon">
+                        <i class="fas fa-file-alt" aria-hidden="true"></i> <!-- Record Icon -->
+                    </span>
+                    <span>Create Record</span>
+                </li>
+            </ul>
+        </div>
+
         <!-- Settings Menu Item -->
         <li (click)="selectMenuItem('settings')" [class.selected]="selectedMenuItem === 'settings'" role="menuitem" aria-label="Settings" [attr.title]="collapsed ? 'Settings' : null">
             <div class="item">
@@ -40,7 +58,7 @@
                 <span class="category-icon">
                     <i class="fas fa-lock" aria-hidden="true"></i>
                 </span>
-                <span class="category-text" *ngIf="!collapsed">Vault</span>
+                <span class="category-text" *ngIf="!collapsed">My Vault</span>
                 <i [class]="isVaultCollapsed ? 'fas fa-chevron-down' : 'fas fa-chevron-up'" aria-hidden="true"></i>
             </div>
         </li>
@@ -71,3 +89,15 @@
         </div>
     </ul>
 </div>
+
+<!-- Modal component -->
+<app-modal
+  [title]="modalTitle"
+  [body]="modalContent"
+  [isOpen]="isModalOpen"
+  [showCancelButton]="true"
+  [showConfirmButton]="true"
+  (confirmAction)="onConfirmAction()"
+  (cancelAction)="onCloseModal()"
+  (closeModalEvent)="onCloseModal()"
+></app-modal>
