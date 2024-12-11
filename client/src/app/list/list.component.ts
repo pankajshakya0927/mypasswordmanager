@@ -1,20 +1,35 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrl: './list.component.scss',
-  imports: [CommonModule]
+  styleUrls: ['./list.component.scss'],
+  imports: [CommonModule, FormsModule]
 })
-export class ListComponent {
+export class ListComponent implements OnChanges {
   @Input() items: any[] = [];
   @Input() categorySelected: any;
   @Output() itemSelected = new EventEmitter<any>();
 
-  selectedItem: any;
+  searchQuery: string = '';
+  filteredItems: any[] = [];
+  selectedItem: any = null;
 
-  selectItem(item: any) {
+  ngOnChanges(): void {
+    console.log(this.items);
+    this.filteredItems = [...this.items]; // Initialize with all items
+  }
+
+  filterItems(): void {
+    const query = this.searchQuery.toLowerCase();
+    this.filteredItems = this.items.filter((item) =>
+      item.name.toLowerCase().includes(query)
+    );
+  }
+
+  selectItem(item: any): void {
     this.selectedItem = item;
     this.itemSelected.emit(item);
   }

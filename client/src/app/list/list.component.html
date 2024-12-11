@@ -1,11 +1,19 @@
-<div class="list" *ngIf="items?.length">
-    <div class="list-header">
-        <i [class]="categorySelected.icon" aria-hidden="true"></i>
-        <span>{{ categorySelected?.name }}</span>
-    </div>
+<div class="list" *ngIf="filteredItems?.length || searchQuery">
+        <div class="search-input">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input type="text" placeholder="Search" [(ngModel)]="searchQuery" (input)="filterItems()" aria-label="Search items" />
+        </div>
+        <div class="list-header">
+            <i [class]="categorySelected.icon" aria-hidden="true"></i>
+            <span>{{ categorySelected?.name }}</span>
+        </div>
     <div class="list-body">
-        <div *ngFor="let item of items" (click)="selectItem(item)" class="list-item" [class.selected]="selectedItem === item" role="listitem" tabindex="0" [attr.aria-label]="item.name" [attr.aria-selected]="selectedItem === item">
+        <div *ngFor="let item of filteredItems" (click)="selectItem(item)" class="list-item" [class.selected]="selectedItem === item" role="listitem" tabindex="0" [attr.aria-label]="item.name" [attr.aria-selected]="selectedItem === item">
             <p>{{ item.name }}</p>
         </div>
     </div>
+</div>
+
+<div *ngIf="!filteredItems?.length && searchQuery" class="no-results">
+    <p>No items found.</p>
 </div>
