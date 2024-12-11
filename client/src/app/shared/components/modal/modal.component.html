@@ -1,0 +1,18 @@
+<div class="modal-overlay" *ngIf="isOpen">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>{{ title }}</h3>
+            <button class="close-btn" (click)="closeModal()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>{{ body }}</p>
+        </div>
+        <div class="modal-actions">
+            <!-- Using app-button for modal actions -->
+            <app-button *ngIf="showCancelButton" label="Cancel" variant="secondary" (click)="cancel()"></app-button>
+            <app-button *ngIf="showConfirmButton" label="Confirm" variant="primary" (click)="confirm()"></app-button>
+        </div>
+    </div>
+</div>

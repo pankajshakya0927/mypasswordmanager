@@ -1,0 +1,58 @@
+/* General Button Styles */
+button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: background-color 0.2s, color 0.2s;
+    outline: none;
+
+    i {
+        font-size: 16px;
+        /* Icon size */
+    }
+}
+
+/* Button Variants */
+.primary {
+    background-color: #ffc107;
+    /* Keeper button color */
+    color: #000;
+    /* Black text */
+}
+
+.primary:hover {
+    background-color: #e0a800;
+    /* Slightly darker on hover */
+}
+
+.secondary {
+    background-color: #6c757d; /* A soft gray background */
+    color: #fff; /* White text for contrast */
+}
+
+.secondary:hover {
+    background-color: #5a6268; /* Slightly darker gray on hover */
+    border-color: #545b62; /* Darker border on hover */
+}
+
+.danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.danger:hover {
+    background-color: #a71d2a;
+}
+
+/* Disabled Button */
+button:disabled {
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    cursor: not-allowed;
+}
