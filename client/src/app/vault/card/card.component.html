@@ -1,0 +1,54 @@
+<form [formGroup]="cardForm" class="form-container" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="cardHolderName">Cardholder Name</label>
+        <input id="cardHolderName" formControlName="cardHolderName" placeholder="Enter cardholder name" />
+        <div *ngIf="cardForm.get('cardHolderName')?.invalid && cardForm.get('cardHolderName')?.touched" class="error-message">
+            Cardholder Name is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input id="cardNumber" formControlName="cardNumber" placeholder="Enter card number" />
+        <div *ngIf="cardForm.get('cardNumber')?.hasError('required') && cardForm.get('cardNumber')?.touched" class="error-message">
+            Card Number is required.
+        </div>
+        <div *ngIf="cardForm.get('cardNumber')?.hasError('minlength') && cardForm.get('cardNumber')?.touched" class="error-message">
+            Card Number must be 16 digits.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="expiryDate">Expiry Date</label>
+        <input id="expiryDate" formControlName="expiryDate" placeholder="MM/YY" />
+        <div *ngIf="cardForm.get('expiryDate')?.invalid && cardForm.get('expiryDate')?.touched" class="error-message">
+            Expiry Date is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input id="cvv" formControlName="cvv" type="password" placeholder="CVV" />
+        <div *ngIf="cardForm.get('cvv')?.invalid && cardForm.get('cvv')?.touched" class="error-message">
+            CVV is required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pin">PIN</label>
+        <input id="pin" formControlName="pin" type="password" placeholder="Enter PIN" />
+        <div *ngIf="cardForm.get('pin')?.invalid && cardForm.get('pin')?.touched" class="error-message">
+            PIN is required.
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <app-button
+            [label]="'Submit'"
+            [variant]="'primary'"
+            [disabled]="cardForm.invalid"
+            type="submit"
+            aria-label="Submit Card Details">
+        </app-button>
+    </div>
+</form>
