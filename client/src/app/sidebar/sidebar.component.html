@@ -93,11 +93,58 @@
 <!-- Modal component -->
 <app-modal
   [title]="modalTitle"
-  [body]="modalContent"
   [isOpen]="isModalOpen"
   [showCancelButton]="true"
   [showConfirmButton]="true"
   (confirmAction)="onConfirmAction()"
   (cancelAction)="onCloseModal()"
-  (closeModalEvent)="onCloseModal()"
-></app-modal>
+  (closeModalEvent)="onCloseModal()">
+  
+  <!-- Record Form -->
+  <ng-container *ngIf="modalContent === 'record'">
+    <form [formGroup]="recordForm">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" formControlName="category" aria-label="Select category">
+          <option *ngFor="let category of ['Credit Card', 'Debit Card', 'Bank Account']" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+        <div *ngIf="recordForm.get('category')?.invalid && recordForm.get('category')?.touched" class="error">
+          Category is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          id="title"
+          type="text"
+          formControlName="title"
+          placeholder="Enter record title"
+          aria-label="Record title" />
+        <div *ngIf="recordForm.get('title')?.invalid && recordForm.get('title')?.touched" class="error">
+          Title is required.
+        </div>
+      </div>
+    </form>
+  </ng-container>
+
+  <!-- Category Form -->
+  <ng-container *ngIf="modalContent === 'category'">
+    <form [formGroup]="categoryForm">
+      <div class="form-group">
+        <label for="categoryName">Category Name</label>
+        <input
+          id="categoryName"
+          type="text"
+          formControlName="name"
+          placeholder="Enter category name"
+          aria-label="Category name" />
+        <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched" class="error">
+          Category name is required.
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</app-modal>

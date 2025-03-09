@@ -6,11 +6,14 @@
                 <i class="fa fa-times" aria-hidden="true"></i>
             </button>
         </div>
+
+        <!-- Modal Body -->
         <div class="modal-body">
-            <p>{{ body }}</p>
+            <ng-content></ng-content>
         </div>
+
+        <!-- Modal Actions -->
         <div class="modal-actions">
-            <!-- Using app-button for modal actions -->
             <app-button *ngIf="showCancelButton" label="Cancel" variant="secondary" (click)="cancel()"></app-button>
             <app-button *ngIf="showConfirmButton" label="Confirm" variant="primary" (click)="confirm()"></app-button>
         </div>

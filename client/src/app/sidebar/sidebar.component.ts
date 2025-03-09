@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ModalComponent } from '../shared/components/modal/modal.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  imports: [CommonModule, ModalComponent]
+  imports: [CommonModule, ModalComponent, ReactiveFormsModule]
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() collapsed = false;
   @Input() categories: any[] = []; // Categories for the Vault menu
   @Input() isMobile: boolean = false;
@@ -25,9 +26,28 @@ export class SidebarComponent {
 
   isModalOpen = false;
   modalTitle = '';
-  modalContent = '';
+  modalContent: 'record' | 'category' | null = null;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  recordForm!: FormGroup;
+  categoryForm!: FormGroup;
+
+  constructor(private fb: FormBuilder) { }
+  
+  ngOnInit(): void {
+    this.initForms();
+  }
+
+  initForms(): void {
+    this.recordForm = this.fb.group({
+      category: [null, Validators.required],
+      title: ['', [Validators.required, Validators.minLength(3)]]
+    });
+
+    this.categoryForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', Validators.required]
+    });
+  }
 
   // Toggle sidebar collapse/expand
   toggleSidebar(): void {
@@ -47,20 +67,18 @@ export class SidebarComponent {
     this.selectedCategory = null;
   }
 
-  // Handle the selection of category or record from dropdown
+  // Handle modal open and set content
   selectCreateOption(option: 'category' | 'record'): void {
     if (option === 'category') {
       this.modalTitle = 'New Category';
-      this.modalContent = 'Please fill in the details for the new category.';
-      this.isModalOpen = true;
-      this.createNewCategory.emit(); // Emit event to create a new category
+      this.modalContent = 'category';
+      this.categoryForm.reset();
     } else if (option === 'record') {
       this.modalTitle = 'New Record';
-      this.modalContent = 'Please fill in the details for the new record.';
-      this.isModalOpen = true;
-      this.createNewRecord.emit(); // Emit event to create a new record
+      this.modalContent = 'record';
+      this.recordForm.reset();
     }
-    this.selectedMenuItem = null; // Close the dropdown after selection
+    this.isModalOpen = true;
   }
 
   // Toggle Vault visibility and selection state
@@ -77,21 +95,30 @@ export class SidebarComponent {
   }
 
   // Handle confirmation action (called when the "Confirm" button is clicked)
-  onConfirmAction() {
-    // You can perform any action here, for example:
-    if (this.modalTitle === 'Create New Category') {
-      console.log('Creating a new category...');
-      // Your logic for creating a new category
-    } else if (this.modalTitle === 'Create New Record') {
-      console.log('Creating a new record...');
-      // Your logic for creating a new record
+  onConfirmAction(): void {
+    if (this.modalContent === 'record' && this.recordForm.valid) {
+      const selectedCategory = this.recordForm.value.category; // Get selected category
+      this.openDetailsComponent(selectedCategory); // Dynamically open DetailsComponent with category
+      this.isModalOpen = false;
+      // Add logic to save the record
+    } else if (this.modalContent === 'category' && this.categoryForm.valid) {
+      console.log('Category Created:', this.categoryForm.value);
+      // Add logic to save the category
+    } else {
+      // Mark all controls as touched to show validation errors
+      this.recordForm.markAllAsTouched();
+      this.categoryForm.markAllAsTouched();
     }
-
-    // Close the modal after confirming
-    this.onCloseModal();
   }
 
-  onCloseModal() {
+  openDetailsComponent(category: string): void {
+    // Logic to navigate or dynamically load DetailsComponent
+    this.selectedCategory = category; // Pass this to DetailsComponent as an @Input
+    this.categorySelected.emit(category);
+  }
+
+  onCloseModal(): void {
     this.isModalOpen = false;
+    this.modalContent = null; // Reset the modal content
   }
 }
