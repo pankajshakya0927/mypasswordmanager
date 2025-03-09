@@ -16,3 +16,15 @@
         </div>
     </form>
 </div>
+
+<div *ngIf="categorySelected" class="details">
+    <div class="details-header">
+        <button *ngIf="isMobile" class="back-button" (click)="back.emit()" aria-label="Back to previous page">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+        </button>
+        <h3>{{ categorySelected || "Add Details" }}</h3>
+    </div>
+    <ng-container *ngIf="isCard">
+        <app-card></app-card>
+    </ng-container>
+</div>
